@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using DDDSample.Infra.Data.Mappings;
+using System.IO;
 
 namespace DDDSample.Infra.Data.Context
 {
@@ -18,6 +19,7 @@ namespace DDDSample.Infra.Data.Context
         {
             _env = env;
         }
+        public EventStoreSQLContext() { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,7 +32,8 @@ namespace DDDSample.Infra.Data.Context
         {
             // get the configuration from the app settings
             var config = new ConfigurationBuilder()
-                .SetBasePath(_env.ContentRootPath)
+                //.SetBasePath(_env.ContentRootPath)
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 

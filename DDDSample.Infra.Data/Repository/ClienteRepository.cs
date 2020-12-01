@@ -7,7 +7,7 @@ namespace DDDSample.Infra.Data.Repository
 {
     public class ClienteRepository : Repository<Cliente>, IClienteRepository
     {
-        public ClienteRepository(DDDSampleContext context) : base(context)
+        public ClienteRepository(BackEndTestContext context) : base(context)
         {
 
         }

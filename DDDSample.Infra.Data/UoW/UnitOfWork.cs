@@ -5,9 +5,9 @@ namespace DDDSample.Infra.Data.UoW
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DDDSampleContext _context;
+        private readonly BackEndTestContext _context;
 
-        public UnitOfWork(DDDSampleContext context)
+        public UnitOfWork(BackEndTestContext context)
         {
             _context = context;
         }

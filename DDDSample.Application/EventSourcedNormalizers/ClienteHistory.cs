@@ -13,7 +13,7 @@ namespace DDDSample.Application.EventSourcedNormalizers
         public static IList<ClienteHistoryData> ToJavaScriptAdvHistory(IList<StoredEvent> storedEvents)
         {
             HistoryData = new List<ClienteHistoryData>();
-            AdvHistoryDeserializer(storedEvents);
+            ClienteHistoryDeserializer(storedEvents);
 
             var sorted = HistoryData.OrderBy(c => c.When);
             var list = new List<ClienteHistoryData>();
@@ -23,15 +23,15 @@ namespace DDDSample.Application.EventSourcedNormalizers
             {
                 var jsSlot = new ClienteHistoryData
                 {
-                    ID = change.ID == last.ID ? Guid.NewGuid() : change.ID,
+                    ID =  change.ID,
 
-                    Nome  = string.IsNullOrWhiteSpace(change.Nome) || change.Nome == last.Nome ? "" : change.Nome,
+                    Nome  = string.IsNullOrWhiteSpace(change.Nome) ? "" : change.Nome,
 
                     //Modelo = string.IsNullOrWhiteSpace(change.Modelo) || change.Modelo == last.Modelo ? "" : change.Modelo,
 
                     //Versao = string.IsNullOrWhiteSpace(change.Versao) || change.Versao == last.Versao ? "" : change.Versao,
 
-                    Idade   = string.IsNullOrWhiteSpace(change.Idade) || change.Idade== last.Idade ? "" : change.Idade,
+                    Idade   = string.IsNullOrWhiteSpace(change.Idade) ? "" : change.Idade,
 
                     //Quilometragem = string.IsNullOrWhiteSpace(change.Quilometragem) || change.Quilometragem == last.Quilometragem ? "": change.Quilometragem,
 
@@ -50,7 +50,7 @@ namespace DDDSample.Application.EventSourcedNormalizers
             return list;
         }
 
-        private static void AdvHistoryDeserializer(IEnumerable<StoredEvent> storedEvents)
+        private static void ClienteHistoryDeserializer(IEnumerable<StoredEvent> storedEvents)
         {
             foreach (var e in storedEvents)
             {
@@ -59,7 +59,7 @@ namespace DDDSample.Application.EventSourcedNormalizers
 
                 switch (e.MessageType)
                 {
-                    case "AdvRegisteredEvent":
+                    case "ClienteRegisteredEvent":
                         values = JsonConvert.DeserializeObject<dynamic>(e.Data);
                         slot.Nome = values["Nome"];
                         //slot.Modelo= values["Modelo"];
@@ -72,7 +72,7 @@ namespace DDDSample.Application.EventSourcedNormalizers
                         slot.ID = values["ID"];
                         slot.Who = e.User;
                         break;
-                    case "AdvUpdatedEvent":
+                    case "ClienteUpdatedEvent":
                         values = JsonConvert.DeserializeObject<dynamic>(e.Data);
                         slot.Nome = values["Nome"];
                         //slot.Modelo = values["Modelo"];
@@ -82,14 +82,14 @@ namespace DDDSample.Application.EventSourcedNormalizers
                         //slot.Observacao = values["Observacao"];
                         slot.Action = "Updated";
                         slot.When = values["Timestamp"];
-                        slot.ID = values["Id"];
+                        slot.ID = values["ID"];
                         slot.Who = e.User;
                         break;
-                    case "AdvRemovedEvent":
+                    case "ClienteRemovedEvent":
                         values = JsonConvert.DeserializeObject<dynamic>(e.Data);
                         slot.Action = "Removed";
                         slot.When = values["Timestamp"];
-                        slot.ID = values["Id"];
+                        slot.ID = values["ID"];
                         slot.Who = e.User;
                         break;
                 }

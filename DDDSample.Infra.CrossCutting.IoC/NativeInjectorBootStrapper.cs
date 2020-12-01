@@ -24,6 +24,21 @@ namespace DDDSample.Infra.CrossCutting.IoC
 {
     public class NativeInjectorBootStrapper
     {
+        public static void CodeFirst()
+        {
+            using (BackEndTestContext context = new BackEndTestContext())
+            {
+                context.Clientes.Add(new Domain.Models.Cliente("Lucinda Gekcs", 28));
+                context.Clientes.Add(new Domain.Models.Cliente("Miranda Malis", 32));
+                context.Clientes.Add(new Domain.Models.Cliente("Fagner Moura", 17));
+                context.Clientes.Add(new Domain.Models.Cliente("Rodolfo Jussso", 39));
+                context.Clientes.Add(new Domain.Models.Cliente("Fabio Resende", 55));
+                context.Clientes.Add(new Domain.Models.Cliente("Maria Lucia", 29));
+
+                context.SaveChanges();
+            }
+        }
+
         public static void RegisterServices(IServiceCollection services)
         {
             // Asp .NET HttpContext dependency
@@ -52,7 +67,7 @@ namespace DDDSample.Infra.CrossCutting.IoC
             services.AddScoped<IClienteRepository, ClienteRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<DDDSampleContext>();
+            services.AddScoped<BackEndTestContext>();
 
             // Infra - Data EventSourcing
             services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();

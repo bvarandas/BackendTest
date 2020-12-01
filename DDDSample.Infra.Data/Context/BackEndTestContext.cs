@@ -3,17 +3,20 @@ using DDDSample.Infra.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace DDDSample.Infra.Data.Context
 {
-    public class DDDSampleContext : DbContext
+    public class BackEndTestContext : DbContext
     {
         private readonly IHostingEnvironment _env;
 
-        public DDDSampleContext(IHostingEnvironment env)
+        public BackEndTestContext(IHostingEnvironment env)
         {
             _env = env;
         }
+
+        public BackEndTestContext() { }
 
         public DbSet<Cliente> Clientes { get; set; }
 
@@ -28,7 +31,8 @@ namespace DDDSample.Infra.Data.Context
         {
             // get the configuration from the app settings
             var config = new ConfigurationBuilder()
-                .SetBasePath(_env.ContentRootPath)
+                //.SetBasePath(_env.ContentRootPath)
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 

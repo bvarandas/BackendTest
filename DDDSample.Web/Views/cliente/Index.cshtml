@@ -82,11 +82,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Clientes Data History</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <p id="advHistoryData"></p>
+                <p id="clienteHistoryData"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -107,7 +107,7 @@
                 cache: false
             }).done(function(data) {
                 var formatHtml = "<table class='table table-striped'>";
-                formatHtml += "<thead><th>Action</th><th>When</th><th>Id</th><th>Marca</th><th>Modelo</th><th>Versao</th><th>By User</th></thead>";
+                formatHtml += "<thead><th>Action</th><th>When</th><th>Id</th><th>Nome</th><th>Idade</th><th>By User</th></thead>";
 
                 for (var i = 0; i < data.length; i++) {
                     var change = data[i];
@@ -115,14 +115,13 @@
                     formatHtml += "<td>" + change.action + "</td>";
                     formatHtml += "<td>" + change.when + "</td>";
                     formatHtml += "<td>" + change.id + "</td>";
-                    formatHtml += "<td>" + change.marca + "</td>";
-                    formatHtml += "<td>" + change.modelo + "</td>";
-                    formatHtml += "<td>" + change.versao + "</td>";
+                    formatHtml += "<td>" + change.nome + "</td>";
+                    formatHtml += "<td>" + change.idade + "</td>";
                     formatHtml += "<td>" + change.who + "</td>";
                     formatHtml += "</tr>";
                 }
                 formatHtml += "</table>";
-                $("#advHistoryData").html(formatHtml);
+                $("#clienteHistoryData").html(formatHtml);
             });
         });
 </script>
