@@ -1,0 +1,53 @@
+@model DDDSample.Application.ViewModels.ClienteViewModel
+
+@{
+    ViewData["Title"] = "Detalhe Cliente";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Idade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Idade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        @*<dt>
+            Ano
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ano)
+        </dd>
+        <dt>
+            KM
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quilometragem)
+        </dd>
+        <dt>
+            Observacao
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Observacao)
+        </dd>*@
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning">Edit</a> 
+    <a asp-action="Index" class="btn btn-info">Back to List</a>
+</div>

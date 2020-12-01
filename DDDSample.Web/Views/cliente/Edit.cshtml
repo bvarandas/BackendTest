@@ -1,0 +1,77 @@
+@model DDDSample.Application.ViewModels.ClienteViewModel
+
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <hr />
+
+        <input type="hidden" asp-for="ID" />
+
+        @* Replacing classic Validation Summary to Custom ViewComponent as TagHelper *@
+        <vc:summary />
+
+        <div class="form-group">
+            <label asp-for="Nome" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Idade" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Idade" class="form-control" />
+                <span asp-validation-for="Idade" class="text-danger"></span>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label asp-for="Versao" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Versao" class="form-control" />
+                <span asp-validation-for="Versao" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Ano" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Ano" class="form-control" />
+                <span asp-validation-for="Ano" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Quilometragem" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Quilometragem" class="form-control" />
+                <span asp-validation-for="Quilometragem" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Observacao" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Observacao" class="form-control" />
+                <span asp-validation-for="Observacao" class="text-danger"></span>
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-info">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
